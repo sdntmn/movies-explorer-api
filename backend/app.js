@@ -12,9 +12,9 @@ const app = express();
 
 const options = {
   origin: [
+    "http://localhost:3001",
     "http://films.nomoredomains.rocks",
     "https://films.nomoredomains.rocks",
-    "http://localhost:3001",
   ],
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
   preflightContinue: false,
