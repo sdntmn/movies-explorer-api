@@ -7,7 +7,7 @@ const {
   getMovies,
   createMovies,
   deleteMovies,
-} = require("../controllers/moviesСontroller");
+} = require("../controllers/moviesController");
 
 router.get("/", getMovies);
 
@@ -68,15 +68,3 @@ router.delete(
 );
 
 module.exports = router;
-
-/*
-# возвращает все сохранённые пользователем фильмы
-GET / movies
-
-# создаёт фильм с переданными в теле
-# country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId
-POST / movies
-
-# удаляет сохранённый фильм по id
-DELETE / movies / movieId
-*/

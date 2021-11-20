@@ -6,6 +6,12 @@ const mongoose = require("mongoose");
 // Схема user преобразуем схему в модель и перадаем её в контроллер
 // там обрабатываем введенные данные
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    default: "Александр",
+    minlength: 2,
+    maxlength: 30,
+  },
   email: {
     type: String,
     required: true,
@@ -16,18 +22,12 @@ const userSchema = new mongoose.Schema({
       },
       message: "Не корректный email",
     },
-    password: {
-      type: String,
-      required: true,
-      select: false,
-    },
-    name: {
-      type: String,
-      default: "Александр",
-      minlength: 2,
-      maxlength: 30,
-    },
-  }
+  },
+  password: {
+    type: String,
+    required: true,
+    select: false,
+  },
 });
 
 userSchema.statics.findUserByCredentials = function (email, password) {
