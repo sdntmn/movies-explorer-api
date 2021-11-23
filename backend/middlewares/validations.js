@@ -1,16 +1,17 @@
-const { celebrate, Joi } = require("celebrate");
-const validator = require("validator");
+const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
 
 module.exports.validateUpdateData = celebrate({
   body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().custom((value) => {
       if (!validator.isEmail(value, { require_protocol: true })) {
-        throw new Error("Не корректный email");
+        throw new Error('Не корректный email');
       } else {
         return value;
       }
     }),
-    name: Joi.string().required().min(2).max(30),
+
   }),
 });
 
@@ -23,7 +24,7 @@ module.exports.validateLoginData = celebrate({
 
 module.exports.validateCreateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
@@ -40,16 +41,16 @@ module.exports.validateSaveMovies = celebrate({
       .required()
       .custom((value) => {
         if (!validator.isURL(value, { require_protocol: true })) {
-          throw new Error("Неправильный формат ссылки");
+          throw new Error('Неправильный формат ссылки');
         } else {
           return value;
         }
       }),
-    trailerLink: Joi.string()
+    trailer: Joi.string()
       .required()
       .custom((value) => {
         if (!validator.isURL(value, { require_protocol: true })) {
-          throw new Error("Неправильный формат ссылки");
+          throw new Error('Неправильный формат ссылки');
         } else {
           return value;
         }
@@ -60,7 +61,7 @@ module.exports.validateSaveMovies = celebrate({
       .required()
       .custom((value) => {
         if (!validator.isURL(value, { require_protocol: true })) {
-          throw new Error("Неправильный формат ссылки");
+          throw new Error('Неправильный формат ссылки');
         } else {
           return value;
         }
@@ -72,5 +73,5 @@ module.exports.validateSaveMovies = celebrate({
 module.exports.validateDeleteMovie = celebrate({
   params: Joi.object().keys({
     movieId: Joi.string().length(24).hex(),
-  })
+  }),
 });

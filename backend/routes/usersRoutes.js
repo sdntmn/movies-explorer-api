@@ -1,20 +1,20 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-const { validateUpdateData } = require("../middlewares/validations");
+const { validateUpdateData } = require('../middlewares/validations');
 
 const {
   getAuthUser,
   updateUser,
-} = require("../controllers/usersController");
+} = require('../controllers/usersController');
 
 // возвращает информацию о пользователе
-router.get("/me", getAuthUser);
+router.get('/me', getAuthUser);
 
 // обновление данных пользователя
 router.patch(
-  "/me",
+  '/me',
   validateUpdateData,
-  updateUser
+  updateUser,
 );
 
 module.exports = router;
