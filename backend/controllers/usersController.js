@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken');
 // Импортируем модель
 const User = require('../models/userModel');
 
+const { JWT_KEY } = require('../utils/config');
+
 const ConflictError409 = require('../errors/conflict-err-409');
 const UnauthorizedErr401 = require('../errors/unauthorized-err-401');
 const BadRequestError400 = require('../errors/bad-request-err-400');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
 
 // Обрабатываем запрос на создание User=====================================
 module.exports.createUser = (req, res, next) => {
@@ -45,7 +45,7 @@ module.exports.login = (req, res, next) => {
       }
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        JWT_KEY,
         {
           expiresIn: '7d',
         },

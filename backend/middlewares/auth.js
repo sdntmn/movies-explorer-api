@@ -1,5 +1,6 @@
 // импортируем модуль jsonwebtoken
 const jwt = require('jsonwebtoken');
+const { JWT_KEY } = require('../utils/config');
 
 const UnauthorizedErr401 = require('../errors/unauthorized-err-401');
 
@@ -13,12 +14,10 @@ module.exports = (req, res, next) => {
   const token = authorization.replace('Bearer ', '');
   let payload;
 
-  const { NODE_ENV, JWT_SECRET } = process.env;
-
   try {
     payload = jwt.verify(
       token,
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      JWT_KEY,
     );
   } catch (err) {
     return next(new UnauthorizedErr401('Необходима авторизация'));
