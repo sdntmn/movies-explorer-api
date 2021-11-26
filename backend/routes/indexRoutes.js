@@ -22,7 +22,7 @@ router.post(
 // роуты с авторизацией
 router.use('/users', auth, userRouter);
 router.use('/movies', auth, moviesRouter);
-router.all('*', (req, res, next) => {
+router.all('*', auth, (req, res, next) => {
   next(new NotFoundError404('Маршрут не найден'));
 });
 
