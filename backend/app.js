@@ -8,7 +8,7 @@ const router = require('./routes/indexRoutes');
 const errorHendler = require('./middlewares/errorHendler');
 const { MONGO_URL } = require('./utils/config');
 
-const { PORT = 3002 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 
